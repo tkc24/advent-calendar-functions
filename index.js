@@ -7,9 +7,12 @@ admin.initializeApp();
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.helloWorld = https.onRequest((request, response) => {
-  response.send("Hello from Firebase!");
+  response.send("Hello from Firebase!" + functions.config().sample.key);
 });
 
 exports.hello = https.onCall(async (data, context) => {
-  return { message: `Hello, ${data.name}`, uid: context.auth.uid };
+  return {
+    message: `Hello, ${data.name}. ${functions.config().sample.key}`,
+    uid: context.auth.uid
+  };
 });
