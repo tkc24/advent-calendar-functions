@@ -1,0 +1,60 @@
+Arguments: 
+  /Users/takeshi/.ndenv/versions/v8.16.2/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Users/takeshi/.ndenv/versions/v8.16.2/bin:/Users/takeshi/.ndenv/libexec:/Users/takeshi/.ndenv/plugins/node-build/bin:/Users/takeshi/local/rbenv/shims:/Users/takeshi/local/rbenv/bin:/Users/takeshi/local/bin:/Users/takeshi/.ndenv/bin:/Users/takeshi/local/rbenv/shims:/Users/takeshi/local/rbenv/bin:/Users/takeshi/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/takeshi/.ndenv/shims:/Users/takeshi/local/rbenv/shims:/Users/takeshi/local/rbenv/bin:/Users/takeshi/local/bin:/Users/takeshi/.ndenv/bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  8.16.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/firebase-admin: Service Unavailable
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:61073:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:120166:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:121138:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:121060:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
+
+npm manifest: 
+  {
+    "name": "functions",
+    "description": "Cloud Functions for Firebase",
+    "scripts": {
+      "lint": "eslint .",
+      "serve": "firebase serve --only functions",
+      "shell": "firebase functions:shell",
+      "start": "npm run shell",
+      "deploy": "firebase deploy --only functions",
+      "logs": "firebase functions:log"
+    },
+    "engines": {
+      "node": "8"
+    },
+    "dependencies": {
+      "firebase-admin": "^8.6.0",
+      "firebase-functions": "^3.3.0"
+    },
+    "devDependencies": {
+      "eslint": "^5.12.0",
+      "eslint-plugin-promise": "^4.0.1",
+      "firebase-functions-test": "^0.1.6"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
