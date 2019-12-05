@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const https = functions.region("asia-northeast1").https;
+const firestore = functions.region("asia-northeast1").firestore;
 const admin = require("firebase-admin");
 admin.initializeApp();
 const mysql = require("mysql");
@@ -46,6 +47,39 @@ exports.updateUser = https.onCall(async (data, context) => {
 exports.getUser = https.onCall(async (data, context) => {
   return await _selectUser(context.auth.uid);
 });
+
+exports.sendPushMessage = firestore
+  .document("messages/{userId}")
+  .onWrite(async (change, context) => {
+    const data = change.after.data();
+    const previousData = change.before.data();
+
+    const userRef = await admin
+      .firestore()
+      .collection("users")
+      .doc(context.params.userId);
+    const userDoc = await userRef.get();
+
+    if (userDoc.exists) {
+      const user = userDoc.data();
+      const payload = {
+        notification: {
+          title: `${user.familyName} ${user.firstName}さんへ`,
+          body: data.message
+        }
+      };
+
+      if (user.fcmToken) {
+        admin.messaging().sendToDevice(user.fcmToken, payload);
+      } else {
+        console.error("No Firebase Cloud Messaging Token.");
+      }
+    } else {
+      console.error("No User.");
+    }
+
+    return true;
+  });
 
 _selectUser = async function(uid) {
   await _initMysqlPool();
